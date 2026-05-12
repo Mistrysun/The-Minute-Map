@@ -67,10 +67,11 @@ const ClockFace = ({ minutes, setMinutes, hours, setHours, showHourHand, isGameM
     // Radius is 160. Minute hand is ~140, Hour hand is ~90.
     if (dist > 100) {
       setDraggingHand('minute');
-    } else if (showHourHand && dist > 10) {
+    } else if (isGameMode && showHourHand && dist > 10) {
+      // Only allow direct hour hand dragging in Game Mode
       setDraggingHand('hour');
     } else {
-      return; // Clicked near center
+      return; // Clicked near center or hour hand when not in game mode
     }
 
     setIsDragging(true);
