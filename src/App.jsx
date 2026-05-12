@@ -254,13 +254,22 @@ function App() {
 
         <div className="control-group">
           <span className="group-label">AM / PM</span>
-          <button
-            className={`avatar-btn ${isAm ? 'active' : ''}`}
-            onClick={() => setIsAm(!isAm)}
-            style={{ width: '100%', borderRadius: '1rem' }}
-          >
-            {isAm ? 'AM (Morning)' : 'PM (Afternoon/Night)'}
-          </button>
+          <div className="avatar-options">
+            <button
+              className={`avatar-btn ${isAm ? 'active' : ''}`}
+              onClick={() => setIsAm(true)}
+              style={{ flex: 1, borderRadius: '0.75rem' }}
+            >
+              AM
+            </button>
+            <button
+              className={`avatar-btn ${!isAm ? 'active' : ''}`}
+              onClick={() => setIsAm(false)}
+              style={{ flex: 1, borderRadius: '0.75rem' }}
+            >
+              PM
+            </button>
+          </div>
         </div>
 
         <div className="control-group">
