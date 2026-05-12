@@ -12,7 +12,6 @@ function App() {
   const [hours, setHours] = useState(12);
   const [showHourHand, setShowHourHand] = useState(false);
   const [avatar, setAvatar] = useState('car');
-  const [themeMode, setThemeMode] = useState('light'); // 'light', 'dark', 'auto'
   const [isAm, setIsAm] = useState(true);
   const [activeLandmark, setActiveLandmark] = useState(null);
   const [showGameHub, setShowGameHub] = useState(false);
@@ -225,9 +224,8 @@ function App() {
     }
   }, [minutes, showHourHand]);
 
-  // Derived Theme
+  // Always synchronize theme with clock time
   const getEffectiveTheme = () => {
-    if (themeMode !== 'auto') return themeMode;
     const h24 = isAm ? (hours === 12 ? 0 : hours) : (hours === 12 ? 12 : hours + 12);
     return (h24 >= 19 || h24 < 7) ? 'dark' : 'light';
   };
@@ -288,31 +286,6 @@ function App() {
               title="Rocket"
             >
               <Rocket size={20} />
-            </button>
-          </div>
-        </div>
-
-        <div className="control-group">
-          <span className="group-label">Theme</span>
-          <div className="theme-options">
-            <button
-              className={`theme-mode-btn ${themeMode === 'light' ? 'active' : ''}`}
-              onClick={() => setThemeMode('light')}
-            >
-              <Sun size={18} />
-            </button>
-            <button
-              className={`theme-mode-btn ${themeMode === 'dark' ? 'active' : ''}`}
-              onClick={() => setThemeMode('dark')}
-            >
-              <Moon size={18} />
-            </button>
-            <button
-              className={`theme-mode-btn auto ${themeMode === 'auto' ? 'active' : ''}`}
-              onClick={() => setThemeMode('auto')}
-              title="Sync with Clock"
-            >
-              Auto
             </button>
           </div>
         </div>
