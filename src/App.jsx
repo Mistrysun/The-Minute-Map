@@ -135,7 +135,10 @@ function App() {
     let isCorrect = false;
 
     if (gameType === 'creator') {
-      isCorrect = creatorTime.h === targetTime.h && creatorTime.m === targetTime.m;
+      // For creator mode (Word to Digital), accept 12h match since the text prompt is ambiguous
+      const targetH12 = targetTime.h % 12 || 12;
+      const creatorH12 = creatorTime.h % 12 || 12;
+      isCorrect = creatorH12 === targetH12 && creatorTime.m === targetTime.m;
     } else {
       const currentM = Math.round(minutes);
       // Map target 24h to 12h for analog comparison
