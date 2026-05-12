@@ -289,10 +289,12 @@ function App() {
         </div>
       </div>
 
-      <div className="header">
-        <h1>The Minute Map</h1>
-        <p>Learn to read time with the Directional Flow</p>
-      </div>
+      {!showGameHub && (
+        <div className="header">
+          <h1>The Minute Map</h1>
+          <p>Learn to read time with the Directional Flow</p>
+        </div>
+      )}
 
       <div className="main-content">
         {showGameHub && gameType === 'none' ? (
@@ -306,8 +308,6 @@ function App() {
               <span className="score-correct">Correct: {score.correct}</span>
               <span className="score-wrong">Wrong: {score.wrong}</span>
             </div>
-
-            {/* ... mission panel content ... */}
 
             <div className="mission-header">
               {gameStatus === 'success' ? 'MISSION ACCOMPLISHED!' :
@@ -382,7 +382,7 @@ function App() {
           <FeedbackPanel phase={phase} instruction={instruction} />
         )}
 
-        {gameType !== 'creator' && (
+        {!showGameHub && gameType !== 'creator' && (
           <ClockFace
             minutes={minutes}
             setMinutes={handleMinutesChange}
@@ -396,7 +396,7 @@ function App() {
           />
         )}
 
-        {(showHourHand || gameType !== 'none') && gameType !== 'creator' && (
+        {!showGameHub && (showHourHand || gameType !== 'none') && gameType !== 'creator' && (
           <div className="time-outputs">
             {/* Hide digital clock if in any game mode (per user request) */}
             {gameType === 'none' && (
