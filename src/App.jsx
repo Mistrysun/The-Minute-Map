@@ -15,6 +15,7 @@ function App() {
   const [isAm, setIsAm] = useState(true);
   const [activeLandmark, setActiveLandmark] = useState(null);
   const [showGameHub, setShowGameHub] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
   const [clockStyle, setClockStyle] = useState('default');
 
   // Game Mode States
@@ -233,9 +234,18 @@ function App() {
   const theme = getEffectiveTheme();
 
   return (
-    <div className={`app-container ${theme}`}>
+    <div className={`app-container ${theme} ${showSettings ? 'settings-open' : ''}`}>
       <DynamicBackground theme={theme} />
-      <div className="controls-panel">
+      
+      {/* Mobile Settings Toggle */}
+      <button className="settings-toggle-btn" onClick={() => setShowSettings(!showSettings)}>
+        <ListChecks size={24} />
+      </button>
+
+      <div className={`controls-panel ${showSettings ? 'open' : ''}`}>
+        <button className="close-settings-btn" onClick={() => setShowSettings(false)}>
+          <X size={24} />
+        </button>
         <div className="settings-header">Map Settings</div>
 
         <div className="control-group">
