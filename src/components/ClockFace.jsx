@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { CarFront, PersonStanding, Rocket } from 'lucide-react';
 
-const ClockFace = ({ minutes, setMinutes, hours, setHours, showHourHand, isGameMode, isDraggable = true, avatar, activeLandmark }) => {
+const ClockFace = ({ minutes, setMinutes, hours, setHours, showHourHand, isGameMode, isDraggable = true, avatar, activeLandmark, clockStyle = 'default' }) => {
   const svgRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
   const [draggingHand, setDraggingHand] = useState(null); // 'minute' or 'hour'
@@ -140,7 +140,7 @@ const ClockFace = ({ minutes, setMinutes, hours, setHours, showHourHand, isGameM
   };
 
   return (
-    <div className="clock-container"
+    <div className={`clock-container ${clockStyle}`}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}

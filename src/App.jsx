@@ -14,6 +14,7 @@ function App() {
   const [theme, setTheme] = useState('light');
   const [activeLandmark, setActiveLandmark] = useState(null);
   const [showGameHub, setShowGameHub] = useState(false);
+  const [clockStyle, setClockStyle] = useState('default');
 
   // Game Mode States
   const [gameType, setGameType] = useState('none'); // 'none', 'written', 'digital', 'creator', 'multiple-choice'
@@ -271,6 +272,32 @@ function App() {
           </button>
         </div>
 
+        <div className="control-group">
+          <span className="group-label">Clock Style</span>
+          <div className="avatar-options">
+            <button
+              className={`style-dot default ${clockStyle === 'default' ? 'active' : ''}`}
+              onClick={() => setClockStyle('default')}
+              title="Classic"
+            />
+            <button
+              className={`style-dot midnight ${clockStyle === 'midnight' ? 'active' : ''}`}
+              onClick={() => setClockStyle('midnight')}
+              title="Midnight"
+            />
+            <button
+              className={`style-dot candy ${clockStyle === 'candy' ? 'active' : ''}`}
+              onClick={() => setClockStyle('candy')}
+              title="Candy"
+            />
+            <button
+              className={`style-dot nature ${clockStyle === 'nature' ? 'active' : ''}`}
+              onClick={() => setClockStyle('nature')}
+              title="Nature"
+            />
+          </div>
+        </div>
+
         <div className="control-group" style={{ marginTop: '0.5rem' }}>
           <button
             className={`game-hub-btn ${showGameHub ? 'active' : ''}`}
@@ -393,6 +420,7 @@ function App() {
             isDraggable={gameType !== 'multiple-choice'}
             avatar={avatar}
             activeLandmark={activeLandmark}
+            clockStyle={clockStyle}
           />
         )}
 

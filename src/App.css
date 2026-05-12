@@ -185,6 +185,26 @@ input:checked+.slider:before {
   transform: scale(1.1);
 }
 
+.style-dot {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 3px solid white;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.style-dot.active {
+  transform: scale(1.3);
+  box-shadow: 0 0 0 2px var(--color-text);
+}
+
+.style-dot.default { background: linear-gradient(135deg, #FFB347, #66D2CE); }
+.style-dot.midnight { background: linear-gradient(135deg, #9F7AEA, #4FD1C5); }
+.style-dot.candy { background: linear-gradient(135deg, #F687B3, #76E4F7); }
+.style-dot.nature { background: linear-gradient(135deg, #F6AD55, #68D391); }
+
 .theme-toggle {
   align-self: center;
   width: 40px;
@@ -266,6 +286,36 @@ input:checked+.slider:before {
   touch-action: none;
   /* Prevent scrolling while dragging */
   user-select: none;
+  transition: all 0.5s ease;
+}
+
+/* Clock Styles */
+.clock-container.midnight {
+  --color-clock-bg: #2D3748;
+  --color-text: #F7FAFC;
+  --color-past: #9F7AEA;
+  --color-to: #4FD1C5;
+}
+
+.clock-container.candy {
+  --color-clock-bg: #FFF5F5;
+  --color-past: #F687B3;
+  --color-to: #76E4F7;
+}
+
+.clock-container.nature {
+  --color-clock-bg: #F0FFF4;
+  --color-past: #F6AD55;
+  --color-to: #68D391;
+}
+
+.clock-container.midnight .clock-tick,
+.clock-container.midnight .clock-tick-major {
+  stroke: rgba(255, 255, 255, 0.2);
+}
+
+.clock-container.midnight .clock-number {
+  fill: #F7FAFC;
 }
 
 .landmark-popup-container {
