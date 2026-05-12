@@ -1128,15 +1128,16 @@ input:checked+.slider:before {
     top: 0;
     right: -100%;
     height: 100vh;
-    width: 100%; /* Full screen overlap */
+    width: 100%;
     border-radius: 0;
     border: none;
-    background: white;
+    background: #FFFFFF !important; /* Force solid white */
+    backdrop-filter: none !important; /* Remove blur on the drawer itself */
     transition: right 0.3s ease;
     box-shadow: none;
     z-index: 200;
     padding-top: 4rem;
-    overflow-y: auto; /* Allow scrolling if settings are long */
+    overflow-y: auto;
   }
 
   .controls-panel.open {
@@ -1156,7 +1157,8 @@ input:checked+.slider:before {
   }
 
   .app-container.dark .controls-panel {
-    background: #2D3748;
+    background: #1A202C !important; /* Force solid dark navy */
+    backdrop-filter: none !important;
     color: white;
   }
 
