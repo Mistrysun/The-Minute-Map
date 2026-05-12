@@ -433,7 +433,13 @@ input:checked+.slider:before {
 
 .app-container.dark .clock-number {
   fill: #F7FAFC;
-  /* White for dark mode */
+}
+
+/* Ensure light-background clocks always have dark numbers for readability */
+.clock-container.default .clock-number,
+.clock-container.candy .clock-number,
+.clock-container.nature .clock-number {
+  fill: #2D3748 !important;
 }
 
 .minute-hand {
