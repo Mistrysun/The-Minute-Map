@@ -242,6 +242,11 @@ function App() {
         <ListChecks size={24} />
       </button>
 
+      {/* Settings Overlay Backdrop */}
+      {showSettings && (
+        <div className="settings-overlay" onClick={() => setShowSettings(false)} />
+      )}
+
       <div className={`controls-panel ${showSettings ? 'open' : ''}`}>
         <button className="close-settings-btn" onClick={() => setShowSettings(false)}>
           <X size={24} />

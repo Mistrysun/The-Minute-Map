@@ -1144,8 +1144,7 @@ input:checked+.slider:before {
   }
 
   /* Backdrop for settings */
-  .app-container.settings-open::after {
-    content: '';
+  .settings-overlay {
     position: fixed;
     top: 0;
     left: 0;
