@@ -255,7 +255,7 @@ function App() {
           <X size={24} />
         </button>
         <div className="settings-header">
-          Map Settings
+          Settings
           {gameType !== 'none' && <span style={{ fontSize: '0.6rem', color: '#FF6B6B', display: 'block', textTransform: 'none', marginTop: '4px' }}>Locked during Mission</span>}
         </div>
 
