@@ -119,7 +119,3 @@
   50% { transform: translateY(-5px); }
 }
 
-/* Adjust App.css to make sure content is above background */
-.app-container > * {
-  z-index: 1;
-}

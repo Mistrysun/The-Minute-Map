@@ -12,7 +12,7 @@ function App() {
   const [hours, setHours] = useState(12);
   const [showHourHand, setShowHourHand] = useState(false);
   const [avatar, setAvatar] = useState('car');
-  const [isAm, setIsAm] = useState(true);
+  const [isAm, setIsAm] = useState(false); // Default to Noon (PM) for light background
   const [activeLandmark, setActiveLandmark] = useState(null);
   const [showGameHub, setShowGameHub] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
@@ -32,14 +32,14 @@ function App() {
       // Crossed 12 clockwise
       setHours(prev => {
         const next = (prev % 12) + 1;
-        if (next === 12) setIsAm(!isAm); // Toggle AM/PM when passing 12
+        if (next === 12 && showHourHand) setIsAm(!isAm); // Only toggle if hour hand is visible
         return next;
       });
     } else if (delta > 30) {
       // Crossed 12 counter-clockwise
       setHours(prev => {
         const next = prev === 1 ? 12 : prev - 1;
-        if (next === 11) setIsAm(!isAm);
+        if (next === 11 && showHourHand) setIsAm(!isAm);
         return next;
       });
     }
@@ -251,7 +251,10 @@ function App() {
         <button className="close-settings-btn" onClick={() => setShowSettings(false)}>
           <X size={24} />
         </button>
-        <div className="settings-header">Map Settings</div>
+        <div className="settings-header">
+          Map Settings
+          {gameType !== 'none' && <span style={{ fontSize: '0.6rem', color: '#FF6B6B', display: 'block', textTransform: 'none', marginTop: '4px' }}>Locked during Mission</span>}
+        </div>
 
         <div className="control-group">
           <label className="toggle-label">
@@ -260,9 +263,18 @@ function App() {
               <input
                 type="checkbox"
                 checked={showHourHand}
-                onChange={(e) => setShowHourHand(e.target.checked)}
+                disabled={gameType !== 'none'}
+                onChange={(e) => {
+                  const newVal = e.target.checked;
+                  setShowHourHand(newVal);
+                  if (!newVal) {
+                    setIsAm(false); // Set to PM (12 PM = Noon = Light)
+                    setHours(12);
+                    setMinutes(0);
+                  }
+                }}
               />
-              <span className="slider"></span>
+              <span className="slider" style={{ opacity: gameType !== 'none' ? 0.5 : 1 }}></span>
             </div>
           </label>
         </div>
@@ -273,14 +285,26 @@ function App() {
             <button
               className={`avatar-btn ${isAm ? 'active' : ''}`}
               onClick={() => setIsAm(true)}
-              style={{ flex: 1, borderRadius: '0.75rem' }}
+              disabled={!showHourHand || gameType !== 'none'}
+              style={{ 
+                flex: 1, 
+                borderRadius: '0.75rem',
+                opacity: (!showHourHand || gameType !== 'none') ? 0.5 : 1,
+                cursor: (showHourHand && gameType === 'none') ? 'pointer' : 'not-allowed'
+              }}
             >
               AM
             </button>
             <button
               className={`avatar-btn ${!isAm ? 'active' : ''}`}
               onClick={() => setIsAm(false)}
-              style={{ flex: 1, borderRadius: '0.75rem' }}
+              disabled={!showHourHand || gameType !== 'none'}
+              style={{ 
+                flex: 1, 
+                borderRadius: '0.75rem',
+                opacity: (!showHourHand || gameType !== 'none') ? 0.5 : 1,
+                cursor: (showHourHand && gameType === 'none') ? 'pointer' : 'not-allowed'
+              }}
             >
               PM
             </button>
@@ -293,6 +317,8 @@ function App() {
             <button
               className={`avatar-btn ${avatar === 'car' ? 'active' : ''}`}
               onClick={() => setAvatar('car')}
+              disabled={gameType !== 'none'}
+              style={{ opacity: gameType !== 'none' ? 0.5 : 1, cursor: gameType !== 'none' ? 'not-allowed' : 'pointer' }}
               title="Car"
             >
               <CarFront size={20} />
@@ -300,6 +326,8 @@ function App() {
             <button
               className={`avatar-btn ${avatar === 'hiker' ? 'active' : ''}`}
               onClick={() => setAvatar('hiker')}
+              disabled={gameType !== 'none'}
+              style={{ opacity: gameType !== 'none' ? 0.5 : 1, cursor: gameType !== 'none' ? 'not-allowed' : 'pointer' }}
               title="Hiker"
             >
               <PersonStanding size={20} />
@@ -307,6 +335,8 @@ function App() {
             <button
               className={`avatar-btn ${avatar === 'rocket' ? 'active' : ''}`}
               onClick={() => setAvatar('rocket')}
+              disabled={gameType !== 'none'}
+              style={{ opacity: gameType !== 'none' ? 0.5 : 1, cursor: gameType !== 'none' ? 'not-allowed' : 'pointer' }}
               title="Rocket"
             >
               <Rocket size={20} />
@@ -320,21 +350,29 @@ function App() {
             <button
               className={`style-dot default ${clockStyle === 'default' ? 'active' : ''}`}
               onClick={() => setClockStyle('default')}
+              disabled={gameType !== 'none'}
+              style={{ opacity: gameType !== 'none' ? 0.5 : 1, cursor: gameType !== 'none' ? 'not-allowed' : 'pointer' }}
               title="Classic"
             />
             <button
               className={`style-dot midnight ${clockStyle === 'midnight' ? 'active' : ''}`}
               onClick={() => setClockStyle('midnight')}
+              disabled={gameType !== 'none'}
+              style={{ opacity: gameType !== 'none' ? 0.5 : 1, cursor: gameType !== 'none' ? 'not-allowed' : 'pointer' }}
               title="Midnight"
             />
             <button
               className={`style-dot candy ${clockStyle === 'candy' ? 'active' : ''}`}
               onClick={() => setClockStyle('candy')}
+              disabled={gameType !== 'none'}
+              style={{ opacity: gameType !== 'none' ? 0.5 : 1, cursor: gameType !== 'none' ? 'not-allowed' : 'pointer' }}
               title="Candy"
             />
             <button
               className={`style-dot nature ${clockStyle === 'nature' ? 'active' : ''}`}
               onClick={() => setClockStyle('nature')}
+              disabled={gameType !== 'none'}
+              style={{ opacity: gameType !== 'none' ? 0.5 : 1, cursor: gameType !== 'none' ? 'not-allowed' : 'pointer' }}
               title="Nature"
             />
           </div>
@@ -347,8 +385,11 @@ function App() {
               if (gameType !== 'none') {
                 setGameType('none');
                 setGameStatus('idle');
+                setShowSettings(false); // Close settings when exiting mission
               } else {
-                setShowGameHub(!showGameHub);
+                const nextHubState = !showGameHub;
+                setShowGameHub(nextHubState);
+                setShowSettings(false); // Close settings regardless of opening/closing hub
               }
             }}
           >
@@ -466,7 +507,7 @@ function App() {
           />
         )}
 
-        {!showGameHub && (showHourHand || gameType !== 'none') && gameType !== 'creator' && (
+        {!showGameHub && showHourHand && gameType !== 'creator' && (
           <div className="time-outputs">
             {/* Hide digital clock if in any game mode (per user request) */}
             {gameType === 'none' && (
