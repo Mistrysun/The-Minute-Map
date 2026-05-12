@@ -62,13 +62,13 @@
   min-height: 100vh;
   padding: 2rem 2rem 5rem 2rem;
   /* Added 5rem bottom padding */
-  background: radial-gradient(circle at top left, #fff, var(--color-bg));
+  background: transparent;
   transition: background-color 0.5s ease;
   position: relative;
 }
 
 .app-container.dark {
-  background: radial-gradient(circle at top left, #2D3748, #1A202C);
+  /* background handled by DynamicBackground */
 }
 
 /* Controls Panel */

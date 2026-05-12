@@ -3,6 +3,7 @@ import './App.css';
 import ClockFace from './components/ClockFace';
 import FeedbackPanel from './components/FeedbackPanel';
 import GameSpinner from './components/GameSpinner';
+import DynamicBackground from './components/DynamicBackground';
 import { CarFront, PersonStanding, Rocket, Sun, Moon, Gamepad2, Trophy, ChevronUp, ChevronDown, MousePointer2, ListChecks, X } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -213,6 +214,7 @@ function App() {
 
   return (
     <div className={`app-container ${theme}`}>
+      <DynamicBackground theme={theme} />
       <div className="controls-panel">
         <div className="settings-header">Map Settings</div>
 

@@ -1,0 +1,125 @@
+.dynamic-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  transition: background 1s ease;
+}
+
+.dynamic-bg.light {
+  background: linear-gradient(to bottom, #EBF8FF 0%, #BEE3F8 100%);
+}
+
+.dynamic-bg.dark {
+  background: linear-gradient(to bottom, #1A202C 0%, #2D3748 100%);
+}
+
+.sky-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+}
+
+.sun {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  filter: drop-shadow(0 0 20px rgba(246, 173, 85, 0.5));
+}
+
+.moon {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+}
+
+.star {
+  position: absolute;
+  opacity: 0.6;
+}
+
+.cloud {
+  position: absolute;
+  opacity: 0.8;
+}
+
+.cloud-1 {
+  top: 15%;
+  right: 20%;
+  animation: drift 20s linear infinite;
+}
+
+.cloud-2 {
+  top: 25%;
+  right: 40%;
+  animation: drift 25s linear infinite reverse;
+}
+
+@keyframes drift {
+  from { transform: translateX(100px); }
+  to { transform: translateX(-100px); }
+}
+
+.landscape {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.water-stream {
+  width: 100%;
+  height: 100px;
+  position: absolute;
+  bottom: 0;
+  z-index: 2;
+}
+
+.horizon-elements {
+  width: 100%;
+  padding: 0 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 20px;
+  z-index: 1;
+}
+
+.element-group {
+  display: flex;
+  align-items: flex-end;
+  gap: 1.5rem;
+}
+
+.house-svg, .tree-svg {
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+}
+
+.pet-container {
+  margin-bottom: 5px;
+}
+
+.floating-subtle {
+  animation: floatSubtle 3s ease-in-out infinite;
+}
+
+@keyframes floatSubtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+/* Adjust App.css to make sure content is above background */
+.app-container > * {
+  z-index: 1;
+}

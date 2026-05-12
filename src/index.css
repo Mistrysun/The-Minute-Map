@@ -43,7 +43,7 @@ body {
   justify-content: center;
   min-height: 100vh;
   padding: 2rem;
-  background: radial-gradient(circle at top left, #fff, var(--color-bg));
+  background: transparent;
 }
 
 /* Animations */
