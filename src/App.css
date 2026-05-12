@@ -1128,15 +1128,15 @@ input:checked+.slider:before {
     top: 0;
     right: -100%;
     height: 100vh;
-    width: 300px;
-    max-width: 85%;
+    width: 100%; /* Full screen overlap */
     border-radius: 0;
     border: none;
-    background: white; /* Solid background */
+    background: white;
     transition: right 0.3s ease;
-    box-shadow: -10px 0 30px rgba(0,0,0,0.2);
+    box-shadow: none;
     z-index: 200;
     padding-top: 4rem;
+    overflow-y: auto; /* Allow scrolling if settings are long */
   }
 
   .controls-panel.open {
