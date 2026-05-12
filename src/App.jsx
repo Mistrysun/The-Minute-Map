@@ -409,7 +409,7 @@ function App() {
         </div>
       )}
 
-      <div className="main-content">
+      <div className={`main-content ${showGameHub ? 'hub-active' : ''}`}>
         {showGameHub && gameType === 'none' ? (
           <GameSpinner onSpinComplete={(type) => {
             setShowGameHub(false);
