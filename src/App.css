@@ -1080,8 +1080,14 @@ input:checked+.slider:before {
   padding: 0.75rem;
   border-radius: 1rem;
   box-shadow: var(--shadow-md);
-  color: var(--color-text);
+  color: #2D3748; /* Solid dark color for visibility */
   cursor: pointer;
+}
+
+.app-container.dark .settings-toggle-btn {
+  background: #2D3748;
+  border-color: #4A5568;
+  color: #F7FAFC;
 }
 
 .close-settings-btn {
@@ -1122,20 +1128,37 @@ input:checked+.slider:before {
     top: 0;
     right: -100%;
     height: 100vh;
-    width: 280px;
+    width: 300px;
+    max-width: 85%;
     border-radius: 0;
     border: none;
-    border-left: 4px solid #EDF2F7;
+    background: white; /* Solid background */
     transition: right 0.3s ease;
-    box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+    box-shadow: -10px 0 30px rgba(0,0,0,0.2);
+    z-index: 200;
+    padding-top: 4rem;
   }
 
   .controls-panel.open {
     right: 0;
   }
 
+  /* Backdrop for settings */
+  .app-container.settings-open::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(4px);
+    z-index: 180;
+  }
+
   .app-container.dark .controls-panel {
-    border-left-color: #4A5568;
+    background: #2D3748;
+    color: white;
   }
 
   .clock-container {
