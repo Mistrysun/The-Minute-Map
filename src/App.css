@@ -205,18 +205,41 @@ input:checked+.slider:before {
 .style-dot.candy { background: linear-gradient(135deg, #F687B3, #76E4F7); }
 .style-dot.nature { background: linear-gradient(135deg, #F6AD55, #68D391); }
 
-.theme-toggle {
-  align-self: center;
-  width: 40px;
+.theme-options {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.theme-mode-btn {
+  flex: 1;
   height: 40px;
-  border-radius: 50%;
+  border-radius: 0.75rem;
   border: none;
-  background: var(--color-text);
-  color: var(--color-bg);
+  background: #EDF2F7;
+  color: #4A5568;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.2s;
+  font-weight: 800;
+  font-size: 0.8rem;
+}
+
+.theme-mode-btn.active {
+  background: var(--color-text);
+  color: var(--color-bg);
+  transform: scale(1.05);
+}
+
+.theme-mode-btn.auto.active {
+  background: #63B3ED;
+  color: white;
+}
+
+.app-container.dark .theme-mode-btn {
+  background: #4A5568;
+  color: #E2E8F0;
 }
 
 .main-content {

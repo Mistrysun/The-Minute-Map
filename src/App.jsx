@@ -12,7 +12,8 @@ function App() {
   const [hours, setHours] = useState(12);
   const [showHourHand, setShowHourHand] = useState(false);
   const [avatar, setAvatar] = useState('car');
-  const [theme, setTheme] = useState('light');
+  const [themeMode, setThemeMode] = useState('light'); // 'light', 'dark', 'auto'
+  const [isAm, setIsAm] = useState(true);
   const [activeLandmark, setActiveLandmark] = useState(null);
   const [showGameHub, setShowGameHub] = useState(false);
   const [clockStyle, setClockStyle] = useState('default');
@@ -28,7 +29,19 @@ function App() {
   const handleMinutesChange = (newMinutes) => {
     let delta = newMinutes - minutes;
     if (delta < -30) {
-      setHours(prev => (prev % 12) + 1);
+      // Crossed 12 clockwise
+      setHours(prev => {
+        const next = (prev % 12) + 1;
+        if (next === 12) setIsAm(!isAm); // Toggle AM/PM when passing 12
+        return next;
+      });
+    } else if (delta > 30) {
+      // Crossed 12 counter-clockwise
+      setHours(prev => {
+        const next = prev === 1 ? 12 : prev - 1;
+        if (next === 11) setIsAm(!isAm);
+        return next;
+      });
     }
     setMinutes(newMinutes);
   };
@@ -212,6 +225,15 @@ function App() {
     }
   }, [minutes, showHourHand]);
 
+  // Derived Theme
+  const getEffectiveTheme = () => {
+    if (themeMode !== 'auto') return themeMode;
+    const h24 = isAm ? (hours === 12 ? 0 : hours) : (hours === 12 ? 12 : hours + 12);
+    return (h24 >= 19 || h24 < 7) ? 'dark' : 'light';
+  };
+
+  const theme = getEffectiveTheme();
+
   return (
     <div className={`app-container ${theme}`}>
       <DynamicBackground theme={theme} />
@@ -230,6 +252,17 @@ function App() {
               <span className="slider"></span>
             </div>
           </label>
+        </div>
+
+        <div className="control-group">
+          <span className="group-label">AM / PM</span>
+          <button
+            className={`avatar-btn ${isAm ? 'active' : ''}`}
+            onClick={() => setIsAm(!isAm)}
+            style={{ width: '100%', borderRadius: '1rem' }}
+          >
+            {isAm ? 'AM (Morning)' : 'PM (Afternoon/Night)'}
+          </button>
         </div>
 
         <div className="control-group">
@@ -261,17 +294,27 @@ function App() {
 
         <div className="control-group">
           <span className="group-label">Theme</span>
-          <button
-            className={`avatar-btn ${theme === 'dark' ? 'active' : ''}`}
-            onClick={() => setTheme(prev => prev === 'light' ? 'dark' : 'light')}
-            style={{ width: '100%', borderRadius: '1rem' }}
-          >
-            {theme === 'light' ? (
-              <><Moon size={20} style={{ marginRight: '8px' }} /> Dark Mode</>
-            ) : (
-              <><Sun size={20} style={{ marginRight: '8px' }} /> Light Mode</>
-            )}
-          </button>
+          <div className="theme-options">
+            <button
+              className={`theme-mode-btn ${themeMode === 'light' ? 'active' : ''}`}
+              onClick={() => setThemeMode('light')}
+            >
+              <Sun size={18} />
+            </button>
+            <button
+              className={`theme-mode-btn ${themeMode === 'dark' ? 'active' : ''}`}
+              onClick={() => setThemeMode('dark')}
+            >
+              <Moon size={18} />
+            </button>
+            <button
+              className={`theme-mode-btn auto ${themeMode === 'auto' ? 'active' : ''}`}
+              onClick={() => setThemeMode('auto')}
+              title="Sync with Clock"
+            >
+              Auto
+            </button>
+          </div>
         </div>
 
         <div className="control-group">
@@ -435,6 +478,9 @@ function App() {
                 <span className="digital-colon">:</span>
                 <span className="digital-minutes">
                   {Math.round(minutes).toString().padStart(2, '0')}
+                </span>
+                <span className="digital-am-pm" style={{ fontSize: '0.8rem', marginLeft: '4px', opacity: 0.7 }}>
+                  {isAm ? 'AM' : 'PM'}
                 </span>
               </div>
             )}

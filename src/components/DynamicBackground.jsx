@@ -36,9 +36,8 @@ const DynamicBackground = ({ theme }) => {
         )}
       </div>
 
-      {/* Landscape Elements */}
+      {/* Landscape Elements - Clean stream only */}
       <div className="landscape">
-        {/* Stream */}
         <div className="water-stream">
           <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
             <path 
@@ -47,51 +46,9 @@ const DynamicBackground = ({ theme }) => {
             ></path>
           </svg>
         </div>
-
-        {/* Houses and Trees */}
-        <div className="horizon-elements">
-          <div className="element-group left">
-            <House color={isDark ? "#2D3748" : "#FC8181"} />
-            <Tree color={isDark ? "#1A202C" : "#48BB78"} />
-          </div>
-          <div className="element-group right">
-            <Tree color={isDark ? "#1A202C" : "#48BB78"} scale={1.2} />
-            <House color={isDark ? "#2D3748" : "#63B3ED"} />
-            <Pet type="cat" color={isDark ? "#A0AEC0" : "#4A5568"} />
-          </div>
-        </div>
       </div>
     </div>
   );
 };
-
-const House = ({ color }) => (
-  <svg width="60" height="60" viewBox="0 0 60 60" className="house-svg">
-    <path d="M10 60 V30 L30 10 L50 30 V60 Z" fill={color} />
-    <rect x="25" y="45" width="10" height="15" fill="rgba(0,0,0,0.2)" />
-    <rect x="15" y="35" width="10" height="10" fill="rgba(255,255,255,0.3)" />
-  </svg>
-);
-
-const Tree = ({ color, scale = 1 }) => (
-  <svg width={40 * scale} height={60 * scale} viewBox="0 0 40 60" className="tree-svg">
-    <rect x="17" y="40" width="6" height="20" fill="#744210" />
-    <circle cx="20" cy="25" r="20" fill={color} />
-  </svg>
-);
-
-const Pet = ({ type, color }) => (
-  <div className="pet-container floating-subtle">
-    {type === 'cat' && (
-      <svg width="30" height="30" viewBox="0 0 30 30">
-        <circle cx="15" cy="20" r="8" fill={color} />
-        <circle cx="15" cy="12" r="5" fill={color} />
-        <path d="M12 8 L10 4 L14 8 Z" fill={color} />
-        <path d="M18 8 L20 4 L16 8 Z" fill={color} />
-        <path d="M23 20 Q28 20 28 10" stroke={color} strokeWidth="2" fill="none" />
-      </svg>
-    )}
-  </div>
-);
 
 export default DynamicBackground;
